@@ -1,8 +1,17 @@
 {% extends 'game/base.html' %}
+{% load static %}
 
 {% block title %}Game page {% endblock %}
 
 {% block content %}
-    <p id="score">0</p>
-    <button id='click_button'>Click me</button>
+<link rel="stylesheet" href="{% static 'game/css/game.css' %}">
+<p id="score">0</p>
+<p>
+    <span id='seconds'>10</span> 
+    <span id='milliseconds'>00</span>
+
+</p>
+<button id="timer">Start</button>
+<button id='click_button'>Click me</button>
+<script script src="{% static 'game/js/scripts.js' %}"></script>
 {% endblock %}
