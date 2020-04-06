@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#click_button {
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 25px;
+    
+}
