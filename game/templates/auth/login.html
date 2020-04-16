@@ -1,0 +1,20 @@
+{% extends 'game/base.html' %}
+{% load static %}
+
+{% block title %}Login page{% endblock %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+
+    <form action="" method="POST">
+        {{ form.as_p }}
+        <button type="submit">Войти</button>
+        <input type="hidden" name="next" value="{{ next }}">
+        {% csrf_token %}
+    </form>
+<p>Забыли пароль? <a href="{% url 'password_reset' %}">Восстановить</a></p>
+{% endblock %}
