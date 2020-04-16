@@ -4,3 +4,31 @@
     box-sizing: border-box;
     
 }
+
+.navbar {
+    display:flex;
+    justify-content: space-between;
+    background-color: rgb(29, 27, 27);
+}
+
+.navbar a{
+    text-decoration:none;
+    color: #ffffff;
+    display: block;
+}
+.navbar__section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.navbar__item {
+    padding: 15px;
+    margin-left: 15px;
+    color:#ffffff;
+}
+
+.navbar__item:hover {
+    background-color: rgb(83, 76, 76);
+}
