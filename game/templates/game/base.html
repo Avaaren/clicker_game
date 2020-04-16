@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="{% static 'game/css/base.css' %}">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="navbar__section">
+            <div class="navbar__item">Главная</div>
+            <div class="navbar__item">Результаты</div>
+            <div class="navbar__item">Таблица лидеров</div>
+        </div>
+        <div class="navbar__section">
+            <div class="navbar__item">Настройки</div>
+            <div class="navbar__item">Вход</div>
+        </div>
+    </nav>
     {% block content %}
 
     {% endblock %}
