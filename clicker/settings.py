@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    #local
+    # 3-rd party
+    'mathfilters',
+    # local
     'game.apps.GameConfig',
 ]
 
