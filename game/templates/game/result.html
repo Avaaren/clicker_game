@@ -1,0 +1,39 @@
+{% extends 'game/base.html' %}
+{% load mathfilters %}
+{% load static %}
+
+{% block title %}Result page {% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'game/css/result.css' %}">
+<!-- Current game result -->
+<h2>User: {{ game_result.user }}</h2>
+<h3>Score : {{ game_result.score }}</h3>
+
+<!-- Leaderboards ul -->
+<ul class='leaderboard'>
+    <!-- Top 3 best scores -->
+    {% for score in high_scores %}
+        <li>{{ forloop.counter }}) User: {{ score.user.username }} - {{ score.score }} - {{ score.time }}</li>
+    {% endfor %}
+    <!-- If user in highscores only displaying highscores -->
+    {% if is_in_highscores %}
+        Вы заняли {{ your_place }} место, поздравляем!
+    <!-- If not -> displaying highscores and then ... -->
+    {% else %}
+        <li>...</li>
+        <!-- Then display 2 results above user result -->
+        {% for higher_result in higher_results %}
+            <li>{{ your_place|sub:forloop.counter }}) {{ higher_result.user.username }} - {{ higher_result.score }} - {{ higher_result.time }}</li>
+        {% endfor %}
+        <!-- User result -->
+        <li id='user_score'>{{ your_place }}) {{ game_result.user.username }} - {{ game_result.score }} - {{ game_result.time }} </li>
+        <!-- And 2 results below user`s -->
+        {% for lower_result in lower_results %}
+            <li>{{ your_place|add:forloop.counter }}) {{ lower_result.user.username }} - {{ lower_result.score }} - {{ lower_result.time }}</li>
+        {% endfor %}
+    {% endif %}
+
+</ul>
+<a href="{% url 'game' %}">Play again</a>
+{% endblock %}
