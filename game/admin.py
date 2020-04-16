@@ -13,6 +13,6 @@ class GameSessionAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileSessionAdmin(admin.ModelAdmin):
-    
+
     class Meta:
         list_display = ('pk', 'user', 'games_played', 'high_score')

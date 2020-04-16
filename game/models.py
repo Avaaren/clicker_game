@@ -18,6 +18,5 @@ class GameSession(models.Model):
     score = models.PositiveIntegerField(default=0)
     time = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
         return(f'{self.pk} by {self.user}')
