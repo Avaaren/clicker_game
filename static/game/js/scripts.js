@@ -1,17 +1,50 @@
 let button = document.getElementById('click_button');
 let button_timer = document.getElementById('timer')
 
+console.log('result');
 // FUnction starting timer by running reqursion
 function start_timer() {
     milliseconds();
 }
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 
 // Function that resets score and shows result
 function stop_timer() {
     p_result = document.getElementById('score');
     result = parseInt(p_result.innerHTML);
     p_result.innerHTML = '0';
-    alert(result);
+    var csrftoken = getCookie('csrftoken');
+    console.log(csrftoken);
+     $.ajax({
+         url: "/ajax_result/",
+         type: 'POST',
+         dataType: 'json',
+         data: {
+             'result': result,
+             csrfmiddlewaretoken : csrftoken,
+         },
+         success: function(data){
+             if(data.is_success){
+                 window.location.href = data.url;
+             }
+         }
+     });
 }
 
 // Function handling milliseconds
