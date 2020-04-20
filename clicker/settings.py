@@ -19,11 +19,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@w9s21)w5!=94=@5gz7!l_@n8k@p^g^h&2)_9s^nq%3+*%=f)+'
+# # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = '@w9s21)w5!=94=@5gz7!l_@n8k@p^g^h&2)_9s^nq%3+*%=f)+'
+
+import os
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '@w9s21)w5!=94=@5gz7!l_@n8k@p^g^h&2)_9s^nq%3+*%=f)+')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = []
 
@@ -122,9 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'deploy_static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  
+    os.path.join(BASE_DIR, 'static')
 ]
 
 LOGIN_URL = 'login/'
@@ -132,3 +136,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
