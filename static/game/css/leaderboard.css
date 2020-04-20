@@ -1,0 +1,30 @@
+.content-table {
+    border-collapse: collapse;
+    margin: 5px 0px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.20);
+}
+
+.content-table tr th {
+    background-color: rgb(71, 68, 68);
+    color: white;
+    text-align: center;
+}
+
+.content-table th, .content-table td {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.content-table tr {
+    border-bottom: 1px solid #ccc;
+}
+
+.content-table tr:nth-of-type(even) {
+    background-color: rgb(223, 215, 215);
+}
+
+td.position {
+    text-align: left;
+}
