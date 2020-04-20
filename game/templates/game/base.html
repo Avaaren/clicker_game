@@ -13,11 +13,11 @@
     <h1>{{ request.user }}</h1>
     <nav class="navbar">
         <div class="navbar__section">
-            <div class="navbar__item"><a href="#">Главная</a></div>
+            <div class="navbar__item"><a href="{% url 'game' %}">Главная</a></div>
             <div class="navbar__item">
                 <a href="{% url 'user_results' request.user %}">Мои результаты</a>
             </div>
-            <div class="navbar__item"><a href="#">Таблица лидеров</a></div>
+            <div class="navbar__item"><a href="{% url 'leaderboard' %}">Таблица лидеров</a></div>
         </div>
         <div class="navbar__section">
             <div class="navbar__item"><a href="#">Настройки</a></div>
