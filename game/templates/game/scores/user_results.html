@@ -1,0 +1,16 @@
+{% extends 'game/base.html' %}
+{% load static %}
+
+{% block title %}Таблица результатов {% endblock%}
+
+{% block content %}
+    {% if not results %}
+        <h2>Что то не так</h2>
+    {% else %}
+    <ul>
+        {% for result in results %}
+            <li>{{ result }}</li>
+        {% endfor %}
+</ul>
+    {% endif %}
+{% endblock %}
