@@ -9,6 +9,7 @@ urlpatterns = [
     path('ajax_result/', views.ajax_result, name='ajax_result'),
     path('result/', views.ResultView.as_view(), name='result'),
     # Score urls
+    path('leaderboard/', views.LeaderboardView.as_view(), name='leaderboard'),
     path('results/<str:user>/',
          views.UserResultsView.as_view(),
          name='user_results'),
