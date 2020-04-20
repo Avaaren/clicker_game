@@ -1,8 +1,10 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.db.models import F
+
 from .models import Profile, GameSession
 
 
@@ -75,3 +77,26 @@ class ResultView(TemplateView):
         data['lower_results'] = lower_results
         data['higher_results'] = higher_results
         return data
+
+
+class UserResultsView(ListView):
+    model = GameSession
+    template_name = 'game/scores/user_results.html'
+    context_object_name = 'results'
+
+    def get(self, request, **kwargs):
+        user = self.kwargs.get('user')
+
+        if user == 'AnonymousUser':
+            return redirect('login')
+
+    def get_queryset(self, **kwargs):
+        user = self.kwargs.get('user')
+
+        user_results = GameSession.objects.filter(user__username=user).order_by('-time')
+
+        if len(user_results) > 0:
+            return user_results
+        
+        else:
+            return False
