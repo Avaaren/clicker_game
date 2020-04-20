@@ -1,9 +1,11 @@
 let button = document.getElementById('click_button');
-let button_timer = document.getElementById('timer')
+let button_timer = document.getElementById('start-button');
 
 console.log('result');
 // FUnction starting timer by running reqursion
 function start_timer() {
+    document.getElementsByClassName('start-button')[0].style.display = 'none';
+    document.getElementsByClassName('click-button')[0].style.display = 'block';
     milliseconds();
 }
 
@@ -26,6 +28,7 @@ function getCookie(name) {
 
 // Function that resets score and shows result
 function stop_timer() {
+    button = document.getElementById('click_button').disabled = 'true';
     p_result = document.getElementById('score');
     result = parseInt(p_result.innerHTML);
     p_result.innerHTML = '0';
