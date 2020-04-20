@@ -97,6 +97,16 @@ class UserResultsView(ListView):
 
         if len(user_results) > 0:
             return user_results
-        
+
         else:
             return False
+
+
+class LeaderboardView(ListView):
+    model = GameSession
+    template_name = 'game/scores/leaderboard.html'
+    context_object_name = 'scores'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return GameSession.objects.order_by('-score', '-time')[:1000]
