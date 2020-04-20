@@ -4,10 +4,14 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
+    # Game urls 
     path('', views.GameView.as_view(), name='game'),
     path('ajax_result/', views.ajax_result, name='ajax_result'),
     path('result/', views.ResultView.as_view(), name='result'),
-
+    # Score urls
+    path('results/<str:user>/',
+         views.UserResultsView.as_view(),
+         name='user_results'),
     # Auth urls
     path('login/',
          auth_views.LoginView.as_view(
@@ -38,5 +42,5 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(
             template_name='auth/password_reset_complete.html'),
          name='password_reset_complete'),
-    
+  
 ]
