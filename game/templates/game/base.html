@@ -1,30 +1,35 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Clicker game {% endblock %}</title>
     <link rel="stylesheet" href="{% static 'game/css/base.css' %}">
 </head>
+
 <body>
+    <h1>{{ request.user }}</h1>
     <nav class="navbar">
         <div class="navbar__section">
             <div class="navbar__item"><a href="#">Главная</a></div>
-            <div class="navbar__item"><a href="#">Мои результаты</a></div>
+            <div class="navbar__item">
+                <a href="{% url 'user_results' request.user %}">Мои результаты</a>
+            </div>
             <div class="navbar__item"><a href="#">Таблица лидеров</a></div>
         </div>
         <div class="navbar__section">
             <div class="navbar__item"><a href="#">Настройки</a></div>
             <div class="navbar__item">
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'logout' %}">Выход</a>
+                <a href="{% url 'logout' %}">Выход</a>
                 {% else %}
-                    <a href="{% url 'login' %}">Вход</a>
+                <a href="{% url 'login' %}">Вход</a>
                 {% endif %}
             </div>
             {% if request.user.is_authenticated %}
-                <div class="navbar__item">{{ request.user.username }}</div>
+            <div class="navbar__item">{{ request.user.username }}</div>
             {% endif %}
         </div>
     </nav>
@@ -32,4 +37,5 @@
 
     {% endblock %}
 </body>
+
 </html>
