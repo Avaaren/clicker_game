@@ -1,0 +1,44 @@
+{% extends 'game/base.html' %}
+{% load mathfilters %}
+{% load game_filters %}
+{% load static %}
+
+{% block title %}Лучшие результаты {% endblock%}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'game/css/leaderboard.css' %}">
+    <table class=content-table>
+        <tr>
+            <th>Позиция</th>
+            <th>Имя</th>
+            <th>Результат</th>
+            <th>Дата</th>
+        </tr>
+        {% for score in scores %}
+            <tr>
+                <!-- page_obj.number    forloop.counter   your_place|add:forloop.counter -->
+                <td class="position">{{ page_obj.number|index_counter|add:forloop.counter }}</td>
+                <td>{{ score.user }}</td>
+                <td>{{ score.score }}</td>
+                <td>{{ score.time }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+            {% endif %}
+    
+            <span class="current">
+                {{ page_obj.number }}
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
