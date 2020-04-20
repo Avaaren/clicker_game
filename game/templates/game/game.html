@@ -5,18 +5,35 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'game/css/game.css' %}">
-<p id="score">0</p>
-<p>
-    <span id='seconds'>3</span> 
-    <span id='milliseconds'>00</span>
+<div class="container">
 
-</p>
-<button id="timer">Start</button>
-<button id='click_button'>Click me</button>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+  <div class="score">
+    <span>Your score: </span><span id="score">0</span>
+  </div>
+
+  <div class="time">
+    <p>
+      <span>Time left: </span>
+      <span id='seconds'>10</span> :
+      <span id='milliseconds'>00</span>
+    </p>
+
+  </div>
+
+  <div class="buttons">
+    <div class="start-button">
+      <button id="start-button">Start</button>
+    </div>
+    
+    <div class="click-button">
+      <button id='click_button'>Click me</button>
+    </div>
+    
+  </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script script src="{% static 'game/js/scripts.js' %}"></script>
 
 {% endblock %}
