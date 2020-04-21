@@ -19,6 +19,8 @@ urlpatterns = [
              template_name='auth/login.html'),
          name='login'),
 
+    path('signup/', views.registration, name='signup'),
+
     path('logout/',
          auth_views.LogoutView.as_view(),
          name='logout'),
