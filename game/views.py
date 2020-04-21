@@ -10,7 +10,7 @@ from .models import Profile, GameSession
 from .forms import RegistrationForm
 
 
-class GameView(TemplateView):
+class GameView(LoginRequiredMixin, TemplateView):
 
     template_name = 'game/game.html'
 
