@@ -93,13 +93,8 @@ class UserResultsView(ListView):
     def get_queryset(self, **kwargs):
         user = self.kwargs.get('user')
 
-        user_results = GameSession.objects.filter(user__username=user).order_by('-time')
-
-        if len(user_results) > 0:
-            return user_results
-
-        else:
-            return False
+        user_results = GameSession.objects.filter(user=user).order_by('-time')
+        return user_results
 
 
 class LeaderboardView(ListView):
