@@ -55,12 +55,19 @@ class ResultView(TemplateView):
         ).exclude(
             pk=game_obj.pk
         ).order_by('-score', '-time')[:1]
-
-        higher_results = GameSession.objects.filter(
-            score__gte=game_obj.score
-        ).exclude(
-            pk__in=[game_obj.pk, lower_results[0].pk]
-        ).order_by('score', 'time')[:1]
+        # Try except blocks add
+        try: 
+            higher_results = GameSession.objects.filter(
+                score__gte=game_obj.score
+            ).exclude(
+                pk__in=[game_obj.pk, lower_results[0].pk]
+            ).order_by('score', 'time')[:1]
+        except IndexError:
+            higher_results = GameSession.objects.filter(
+                score__gte=game_obj.score
+            ).exclude(
+                pk__in=[game_obj.pk]
+            ).order_by('score', 'time')[:1]
         
         for index, el in enumerate(GameSession.objects.order_by('-score', '-time')):
             if game_obj.pk == el.pk:
@@ -89,11 +96,13 @@ class UserResultsView(ListView):
 
         if user == 'AnonymousUser':
             return redirect('login')
+        
+        return super(UserResultsView, self).get(request, **kwargs)
 
     def get_queryset(self, **kwargs):
         user = self.kwargs.get('user')
 
-        user_results = GameSession.objects.filter(user=user).order_by('-time')
+        user_results = GameSession.objects.filter(user__username=user).order_by('-time')
         return user_results
 
 
