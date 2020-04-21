@@ -1,16 +1,32 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.db.models import F
+from django.contrib.auth.models import User
 
 from .models import Profile, GameSession
+from .forms import RegistrationForm
 
 
 class GameView(TemplateView):
 
     template_name = 'game/game.html'
+
+
+def registration(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password2'])
+            user.save()
+            return render(request, 'auth/registration_done.html', {'form': form})
+    else:
+        form = RegistrationForm()
+    return render(request, 'auth/registration.html', {'form': form})
+
 
 
 def ajax_result(request):
@@ -90,6 +106,7 @@ class UserResultsView(ListView):
     model = GameSession
     template_name = 'game/scores/user_results.html'
     context_object_name = 'results'
+    paginate_by = 10
 
     def get(self, request, **kwargs):
         user = self.kwargs.get('user')
