@@ -9,7 +9,7 @@
     {% else %}
     <ul>
         {% for result in results %}
-            <li>{{ result }}</li>
+        <li>{{ forloop.counter }}) {{ result.user.username }} - {{ result.score }} - {{ result.time }}</li>
         {% endfor %}
 </ul>
     {% endif %}
