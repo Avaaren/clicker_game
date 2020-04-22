@@ -1,0 +1,16 @@
+{% extends 'game/base.html' %}
+{% load static %}
+
+{% block title %}Registration page{% endblock %}
+
+    {% if form.errors %}
+        <p>SMTH goes wrong</p>
+    {% endif %}
+
+{% block content %}
+<form action="" method="POST">
+    {{ form.as_p }}
+    <p><input type="submit" value="Create account"></p>
+    {% csrf_token %}
+</form>
+{% endblock %}

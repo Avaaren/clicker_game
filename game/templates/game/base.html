@@ -22,9 +22,9 @@
             <div class="navbar__item"><a href="#">Настройки</a></div>
             <div class="navbar__item">
                 {% if request.user.is_authenticated %}
-                <a href="{% url 'logout' %}">Выход</a>
+                <a href="{% url 'account:logout' %}">Выход</a>
                 {% else %}
-                <a href="{% url 'login' %}">Вход</a>
+                <a href="{% url 'account:login' %}">Вход</a>
                 {% endif %}
             </div>
             {% if request.user.is_authenticated %}
